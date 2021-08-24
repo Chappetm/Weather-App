@@ -1,8 +1,9 @@
 import React from 'react'
+import Cards from '../Cards/Cards'
 
 export default function Home(){
 
     return (
-        <h1>Home</h1>
+        <Cards />
     )
 }
