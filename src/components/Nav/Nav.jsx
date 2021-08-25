@@ -12,7 +12,7 @@ const NavBar = styled.header`
     justify-content: center;
     align-items: center;
     /* background: linear-gradient(to bottom, #368CA9, white); */
-    background-color: #368CA9;
+    background-color: #046F94;
     height: 10%;
 `;
 
@@ -33,6 +33,10 @@ const H2 = styled(Link)`
     text-decoration: none;
 `;
 
+const DivSearch = styled.div`
+    width: 45%;
+`;
+
 export default function Nav(){
 
     return (
@@ -41,7 +45,9 @@ export default function Nav(){
                 <img src={clima} width='40px' height='40px' />
                 <H2 to='/'>Weather-App</H2>
             </DivH2>
-            <SearchBar />
+            <DivSearch>
+                <SearchBar />
+            </DivSearch>
         </NavBar>
     )
 }

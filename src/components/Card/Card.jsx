@@ -6,7 +6,14 @@ import removeCity from '../../actions/removeCity';
 //Styled-component
 
 const Container = styled.div`
-    border: dotted;
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 235px;
+    border: 1px lightgray solid;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px lightgray;
+    margin: 10px;
 `;
 
 export default function Card({name, min, max, id}){
