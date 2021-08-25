@@ -1,8 +1,19 @@
 import React from 'react'
+import styled from 'styled-components'
 
-export default function Card(){
+//Styled-component
+
+const Container = styled.div`
+    border: dotted;
+`;
+
+export default function Card({name, min, max}){
 
     return (
-        <h1>card</h1>
+        <Container>
+            <h1>{name}</h1>
+            <p>{min}</p>
+            <p>{max}</p>
+        </Container>
     )
 }
