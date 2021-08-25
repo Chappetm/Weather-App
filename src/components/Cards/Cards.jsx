@@ -9,9 +9,8 @@ const Container = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
 `;
 
 export default function Cards(){
@@ -24,9 +23,11 @@ export default function Cards(){
                 cities.length
                 ? cities.map(city => <Card 
                     name={city.name}
+                    temp={city.main.temp}
                     max={city.main.temp_max}
                     min={city.main.temp_min}
                     id={city.id}
+                    time={city.timezone}
                 />)
                 : <span>No hay ciudades</span>
             }

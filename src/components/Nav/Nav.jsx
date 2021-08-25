@@ -11,7 +11,6 @@ const NavBar = styled.header`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    /* background: linear-gradient(to bottom, #368CA9, white); */
     background-color: #046F94;
     height: 10%;
 `;

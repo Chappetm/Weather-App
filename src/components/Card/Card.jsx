@@ -5,18 +5,37 @@ import removeCity from '../../actions/removeCity';
 
 //Styled-component
 
-const Container = styled.div`
+const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
-    width: 350px;
+    width: 80%;
     height: 235px;
     border: 1px lightgray solid;
     border-radius: 10px;
     box-shadow: 5px 5px 20px lightgray;
-    margin: 10px;
+    margin: 10px 0 10px 0;
+    background: linear-gradient(to bottom, #077196, #3190AB);
 `;
 
-export default function Card({name, min, max, id}){
+const Container = styled.div`
+    height: 100%;
+    width: auto;
+    padding: 10px 20px;
+`;
+
+const H1 = styled.h1`
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+`;
+
+const Temp = styled.h1`
+    color: #fff;
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 70px;
+`;
+
+export default function Card({name, temp, min, max, time, id}){
 
     const dispatch = useDispatch();
 
@@ -25,13 +44,17 @@ export default function Card({name, min, max, id}){
         dispatch(removeCity(id))
     }
 
+    const newTime = new Date(time * 1000)
+    console.log(typeof newTime)
 
     return (
-        <Container>
-            <button onClick={(e) => {handleClick(e)}}>X</button>
-            <h1>{name}</h1>
-            <p>MIN: {min}</p>
-            <p>MAX: {max}</p>
-        </Container>
+        <CardContainer>
+            <Container>
+                {/* <button onClick={(e) => {handleClick(e)}}>X</button> */}
+                <H1>Tiempo en {name}</H1>
+                <Temp>{`${Math.floor(temp)}°`}</Temp>
+                {/* <span>{newTime}</span> */}
+            </Container>
+        </CardContainer>
     )
 }
