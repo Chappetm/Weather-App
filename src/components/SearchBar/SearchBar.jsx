@@ -1,6 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import getCity from '../../actions/getCity'
+import styled from 'styled-components'
+
+//Styled-components
+
+const DivSearch = styled.div`
+    width: 45%;
+    display: flex;
+    align-items: center;
+`;
 
 export default function SearchBar(){
     const [ city, setCity ] = useState('')
@@ -18,11 +27,11 @@ export default function SearchBar(){
     }
 
     return (
-        <div>
+        <DivSearch>
             <form onSubmit={(e) => {handleSubmit(e)}}>
                 <input type="text" value={city} onChange={(e) => {handleChange(e)}}/>
                 <input type="submit" />
             </form>
-        </div>
+        </DivSearch>
     )
 }

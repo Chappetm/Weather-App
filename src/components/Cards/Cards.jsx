@@ -11,7 +11,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-around
+    justify-content: space-evenly;
 `;
 
 export default function Cards(){
@@ -26,6 +26,7 @@ export default function Cards(){
                     name={city.name}
                     max={city.main.temp_max}
                     min={city.main.temp_min}
+                    id={city.id}
                 />)
                 : <span>No hay ciudades</span>
             }
