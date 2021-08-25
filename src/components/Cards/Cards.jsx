@@ -28,6 +28,8 @@ export default function Cards(){
                     min={city.main.temp_min}
                     id={city.id}
                     time={city.timezone}
+                    description={city.weather[0].description}
+                    img={city.weather[0].icon}
                 />)
                 : <span>No hay ciudades</span>
             }

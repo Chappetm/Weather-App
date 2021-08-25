@@ -25,10 +25,16 @@ const Input = styled.input`
     font-size: 1em;
     font-family: 'Rubik', sans-serif;
     &::placeholder{
-        color: white;
+        color: #DADADA;
         font-size: 1em;
         font-family: 'Rubik', sans-serif;
+        /* color: transparent; */
     }
+    /*&:hover + Label, 
+    &:not(:placeholder-shown) + Label{
+        transform: translateY(-3.6em) scale(.7);
+        font-size: 30px;
+    } */
 `;
 
 const DivInput = styled.div`
@@ -42,6 +48,12 @@ const Ico = styled.img`
     position: absolute;
     right: 10px;
 `;
+
+// const Label = styled.label`
+//     position: absolute;
+//     transform-origin: 0 0;
+//     display: block;
+// `;
 
 export default function SearchBar(){
     const [ city, setCity ] = useState('')
@@ -62,6 +74,7 @@ export default function SearchBar(){
         <DivSearch>
             <form onSubmit={(e) => {handleSubmit(e)}}>
                 <DivInput>
+                    {/* <Label for='search'>Search</Label> */}
                     <Input id='search' placeholder="Search city" type="text" value={city} onChange={(e) => {handleChange(e)}}/>
                     <Ico src={lupa} width='20px' height='20px' />
                 </DivInput>
