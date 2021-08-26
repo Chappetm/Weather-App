@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components'
 import removeCity from '../../actions/removeCity';
 import moment from 'moment';
+import rain from '../../media/rain.gif'
 
 //Styled-component
 
@@ -16,21 +17,22 @@ const CardContainer = styled.div`
     box-shadow: 5px 5px 20px lightgray;
     margin: 10px 0 10px 0;
     background: linear-gradient(to bottom, #077196, #3190AB);
+    overflow: hidden;
 `;
 
 const Container = styled.div`
     height: 100%;
     width: auto;
-    padding: 10px 40px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    overflow: hidden;
 `;
 
 const H1 = styled.h1`
     display: flex;
     color: #fff;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Comfortaa', sans-serif;
     font-size: 20px;
     font-weight: 400;
     margin: 0;
@@ -69,6 +71,7 @@ const Description = styled.h6`
     font-weight: 400;
     text-align: center;
     font-size: 15px;
+    font-family: 'Comfortaa';
     color: #fff;
     &:first-letter {
         text-transform: uppercase;
@@ -77,12 +80,16 @@ const Description = styled.h6`
 
 const Time = styled(Description)`
     text-align: left;
-    color: #DADADA;
+    color: #C6C6C6;
+    margin: 3px;
 `;
 
 const City = styled(H1)`
-    font-weight: 800;
+    font-weight: 900;
     padding-left: 5px;
+`;
+
+const Img = styled.img`
 `;
 
 
@@ -121,6 +128,7 @@ export default function Card({name, temp, min, max, time, img, description, id})
                     <MinMax>{Math.floor(max)}°/{Math.floor(min)}°</MinMax>
                 </TempDiv>
                 {/* <span>{newTime}</span> */}
+                <Img src={rain} width='400px'/>
             </Container>
         </CardContainer>
     )

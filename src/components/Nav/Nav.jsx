@@ -25,7 +25,7 @@ const DivH2 = styled.div`
 
 const H2 = styled(Link)`
     color: white;
-    font-family: 'Merriweather Sans';
+    font-family: 'Comfortaa';
     font-size: 1.7em;
     font-weight: 600;
     padding: 10px;

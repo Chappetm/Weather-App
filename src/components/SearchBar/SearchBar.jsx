@@ -27,7 +27,7 @@ const Input = styled.input`
     &::placeholder{
         color: #DADADA;
         font-size: 1em;
-        font-family: 'Rubik', sans-serif;
+        font-family: 'Comfortaa', sans-serif;
         /* color: transparent; */
     }
     /*&:hover + Label, 
