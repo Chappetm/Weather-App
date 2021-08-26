@@ -29,6 +29,11 @@ export default function Cards(){
                     id={city.id}
                     time={city.timezone}
                     description={city.weather[0].description}
+                    humidity={city.main.humidity}
+                    feel={city.main.feels_like}
+                    visibility={city.visibility}
+                    wind={city.wind.speed}
+                    pressure={city.main.pressure}
                     img={city.weather[0].icon}
                 />)
                 : <span>No hay ciudades</span>

@@ -3,7 +3,10 @@ import { useDispatch } from 'react-redux';
 import styled from 'styled-components'
 import removeCity from '../../actions/removeCity';
 import moment from 'moment';
-import rain from '../../media/rain.gif'
+import humidit from '../../media/humidity.png'
+import visibilit from '../../media/witness.png'
+import win from '../../media/wind.png'
+import gauge from '../../media/gauge.png'
 
 //Styled-component
 
@@ -22,6 +25,7 @@ const CardContainer = styled.div`
 
 const Container = styled.div`
     height: 100%;
+    padding:  0 50px;
     width: auto;
     display: flex;
     flex-direction: row;
@@ -44,6 +48,7 @@ const Temp = styled.h1`
     font-family: 'Ubuntu', sans-serif;
     font-size: 80px;
     margin: 0;
+    padding: 0  0 0 15px;
 `;
 
 const MinMax = styled.h3`
@@ -89,11 +94,25 @@ const City = styled(H1)`
     padding-left: 5px;
 `;
 
-const Img = styled.img`
+const Hum = styled(Description)`
+    text-align: left;
+    padding: 5px;
+    margin: 3px;
 `;
 
+const DivInfo = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
 
-export default function Card({name, temp, min, max, time, img, description, id}){
+const DivHum = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+export default function Card({name, temp, min, max, time, img, description, humidity, feel, visibility, wind, pressure, id}){
 
     const dispatch = useDispatch();
 
@@ -112,6 +131,9 @@ export default function Card({name, temp, min, max, time, img, description, id})
     const timezoneInMinutes = time / 60;
     const currTime = moment().utcOffset(timezoneInMinutes).format("h:mm A");
 
+    //Visibility
+    const visibi = visibility/1000;
+
 
     return (
         <CardContainer>
@@ -121,14 +143,19 @@ export default function Card({name, temp, min, max, time, img, description, id})
                     <H1>Weather in <City>{name}</City></H1>
                     <Time>{currTime}</Time>
                     <Temp>{`${Math.floor(temp)}°`}</Temp>
+                    <DivHum><Hum>Feels like: {Math.floor(feel)}°</Hum></DivHum>
                 </DivH1>
+                <DivInfo>
+                    <DivHum><img src={humidit} width='20px' height='20px'/><Hum>Humidity: {humidity}%</Hum></DivHum>
+                    <DivHum><img src={visibilit} width='20px' height='20px'/><Hum>Visibility: {visibi} km</Hum></DivHum>
+                    <DivHum><img src={win} width='20px' height='20px'/><Hum>Wind speed: {wind} m/s</Hum></DivHum>
+                    <DivHum><img src={gauge} width='20px' height='20px'/><Hum>Pressure: {pressure} hPa</Hum></DivHum>
+                </DivInfo>
                 <TempDiv>
                     <Description>{description}</Description>
-                    <img src={`http://openweathermap.org/img/wn/${img}@2x.png`}/>
+                    <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} width='100px' height='100px'/>
                     <MinMax>{Math.floor(max)}°/{Math.floor(min)}°</MinMax>
                 </TempDiv>
-                {/* <span>{newTime}</span> */}
-                <Img src={rain} width='400px'/>
             </Container>
         </CardContainer>
     )
