@@ -154,8 +154,8 @@ export default function Card({name, temp, min, max, time, img, description, humi
                 <DivH1>
                     <H1>Weather in <City>{name}</City></H1>
                     <Time>{currTime}</Time>
-                    <Temp>{`${Math.floor(temp)}°`}</Temp>
-                    <DivHum><Hum>Feels like: {Math.floor(feel)}°</Hum></DivHum>
+                    <Temp>{`${Math.round(temp)}°`}</Temp>
+                    <DivHum><Hum>Feels like: {Math.round(feel)}°</Hum></DivHum>
                 </DivH1>
                 <DivInfo>
                     <Center>
@@ -168,7 +168,7 @@ export default function Card({name, temp, min, max, time, img, description, humi
                 <TempDiv>
                     <Description>{description}</Description>
                     <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} width='100px' height='100px'/>
-                    <MinMax>{Math.floor(max)}°/{Math.floor(min)}°</MinMax>
+                    <MinMax>{Math.round(max)}°/{Math.round(min)}°</MinMax>
                 </TempDiv>
             </Container>
         </CardContainer>
