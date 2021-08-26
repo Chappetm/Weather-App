@@ -2,25 +2,47 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
+import MapView from '../MapView/MapView';
 import getDetail from '../../actions/getDetail'
 import getCityById from '../../actions/getCityById';
 import moment from 'moment';
 import win from '../../media/wind.png'
 import visib from '../../media/witness.png'
+import gauge from '../../media/gauge.png'
+import humidi from '../../media/humidity.png'
+import { Map } from 'react-leaflet'
 
 //Styled-components
 
 const Body = styled.div`
-    height: 100%;
-    width: 100%;
+    height: auto;
+    width: auto;
     padding: 80px;
+    display: flex;
+    flex-direction: row;
 `;
 
-const Container = styled.div`
+const ContainerInfo = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+`;
+
+const ContainerOne = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     align-items: flex-start;
+    width: auto;
+`;
+
+const ContainerTwo = styled.div`
+    width: auto;
+    background-color: blueviolet;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const DivLocation = styled.div`
@@ -104,19 +126,22 @@ const DivGeneral = styled.div`
 const DivIcons = styled.div`
     display: flex;
     flex-direction: row;
-    background-color: blue;
+    background-color: black;
 `;
 
 const IconContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 10px 30px;
 `;
 
 const DivP = styled.div`
     display: flex;
     flex-direction: column;
+    margin: 0 10px;
 `;
+
 
 export default function Details(props){
 
@@ -139,40 +164,48 @@ export default function Details(props){
             {
                 (Array.isArray(detail)) 
                 ?<span>cargando...</span>
-                :<Container>
-                    <DivLocation>
-                        <H1>{detail.name}</H1>
-                        <Time>{currTime}</Time>
-                    </DivLocation>
-                    <DivGeneral>
-                        <DivTempInfo>
-                            <DivTemp>
-                                <img src={`http://openweathermap.org/img/wn/${detail.weather[0].icon}@2x.png`} width='100px' height='100px'/>
-                                <Temp>{`${Math.round(detail.main.temp)}°`}</Temp>
-                            </DivTemp>
-                            <DivInfo>
-                                <Description>{detail.weather[0].description}</Description>
-                                <Feel>Feels like: {Math.round(detail.main.feels_like)}°</Feel>
-                                <P>The high will be {Math.round(detail.main.temp_max)}°. </P>
-                            </DivInfo>
-                        </DivTempInfo>
-                        <DivIcons>
-                            <IconContainer>
-                                <img src={win} width='20px' height='20px' />
-                                <DivP><P>Wind</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
-                            </IconContainer>
-                            <IconContainer>
-                                <img src={visib} width='20px' height='20px' />
-                                <DivP><P>Visibility</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
-                            </IconContainer>
-                            <IconContainer>
-                                <img src={win} width='20px' height='20px' />
-                                <DivP><P>Wind</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
-                            </IconContainer>
-                        </DivIcons>
-                    </DivGeneral>
-                    
-                </Container>
+                : <ContainerInfo>
+                    <ContainerOne>
+                        <DivLocation>
+                            <H1>{detail.name}</H1>
+                            <Time>{currTime}</Time>
+                        </DivLocation>
+                        <DivGeneral>
+                            <DivTempInfo>
+                                <DivTemp>
+                                    <img src={`http://openweathermap.org/img/wn/${detail.weather[0].icon}@2x.png`} width='100px' height='100px'/>
+                                    <Temp>{`${Math.round(detail.main.temp)}°c`}</Temp>
+                                </DivTemp>
+                                <DivInfo>
+                                    <Description>{detail.weather[0].description}</Description>
+                                    <Feel>Feels like: {Math.round(detail.main.feels_like)}°</Feel>
+                                    <P>The high will be {Math.round(detail.main.temp_max)}°. </P>
+                                </DivInfo>
+                            </DivTempInfo>
+                            <DivIcons>
+                                <IconContainer>
+                                    <img src={win} width='30px' height='30px' />
+                                    <DivP><P>Wind</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
+                                </IconContainer>
+                                <IconContainer>
+                                    <img src={visib} width='30px' height='30px' />
+                                    <DivP><P>Visibility</P><P>{detail.visibility / 1000} km</P></DivP>
+                                </IconContainer>
+                                <IconContainer>
+                                    <img src={gauge} width='30px' height='30px' />
+                                    <DivP><P>Pressure</P><P>{detail.main.pressure} hPa</P></DivP>
+                                </IconContainer>
+                                <IconContainer>
+                                    <img src={humidi} width='30px' height='30px' />
+                                    <DivP><P>Humidity</P><P>{detail.main.humidity} %</P></DivP>
+                                </IconContainer>
+                            </DivIcons>
+                        </DivGeneral>
+                    </ContainerOne>
+                    <ContainerTwo>
+                        <MapView />
+                    </ContainerTwo>
+                </ContainerInfo>
             }
         </Body>
     )
