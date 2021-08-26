@@ -7,10 +7,11 @@ import humidit from '../../media/humidity.png'
 import visibilit from '../../media/witness.png'
 import win from '../../media/wind.png'
 import gauge from '../../media/gauge.png'
+import { Link } from 'react-router-dom';
 
 //Styled-component
 
-const CardContainer = styled.div`
+const CardContainer = styled(Link)`
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -21,6 +22,7 @@ const CardContainer = styled.div`
     margin: 10px 0 10px 0;
     background: linear-gradient(to bottom, #077196, #3190AB);
     overflow: hidden;
+    text-decoration: none;
 `;
 
 const Container = styled.div`
@@ -63,12 +65,16 @@ const TempDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 33%;
 `;
 
 const DivH1 = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 33%;
 `;
 
 const Description = styled.h6`
@@ -104,12 +110,18 @@ const DivInfo = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    width: 33%;
 `;
 
 const DivHum = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+`;
+
+const Center = styled.div`
+    justify-content: flex-start;
 `;
 
 export default function Card({name, temp, min, max, time, img, description, humidity, feel, visibility, wind, pressure, id}){
@@ -136,7 +148,7 @@ export default function Card({name, temp, min, max, time, img, description, humi
 
 
     return (
-        <CardContainer>
+        <CardContainer to={`/details/${id}`}>
             <Container>
                 {/* <button onClick={(e) => {handleClick(e)}}>X</button> */}
                 <DivH1>
@@ -146,10 +158,12 @@ export default function Card({name, temp, min, max, time, img, description, humi
                     <DivHum><Hum>Feels like: {Math.floor(feel)}°</Hum></DivHum>
                 </DivH1>
                 <DivInfo>
-                    <DivHum><img src={humidit} width='20px' height='20px'/><Hum>Humidity: {humidity}%</Hum></DivHum>
-                    <DivHum><img src={visibilit} width='20px' height='20px'/><Hum>Visibility: {visibi} km</Hum></DivHum>
-                    <DivHum><img src={win} width='20px' height='20px'/><Hum>Wind speed: {wind} m/s</Hum></DivHum>
-                    <DivHum><img src={gauge} width='20px' height='20px'/><Hum>Pressure: {pressure} hPa</Hum></DivHum>
+                    <Center>
+                        <DivHum><img src={humidit} width='20px' height='20px'/><Hum>Humidity: {humidity}%</Hum></DivHum>
+                        <DivHum><img src={visibilit} width='20px' height='20px'/><Hum>Visibility: {visibi} km</Hum></DivHum>
+                        <DivHum><img src={win} width='20px' height='20px'/><Hum>Wind speed: {wind} m/s</Hum></DivHum>
+                        <DivHum><img src={gauge} width='20px' height='20px'/><Hum>Pressure: {pressure} hPa</Hum></DivHum>
+                    </Center>
                 </DivInfo>
                 <TempDiv>
                     <Description>{description}</Description>

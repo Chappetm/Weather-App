@@ -1,8 +1,9 @@
-import { GET_CITY, REMOVE_CITY } from "../actions/const"
+import { GET_CITY, GET_DETAILS, REMOVE_CITY } from "../actions/const"
 
 
 const initialState = {
-    citiesLoaded: []
+    citiesLoaded: [],
+    cityDetails: []
 }
 
 export default function reducer(state = initialState, action){
@@ -25,6 +26,11 @@ export default function reducer(state = initialState, action){
             return {
                 ...state,
                 citiesLoaded: remove
+            }
+        case GET_DETAILS:
+            return {
+                ...state,
+                cityDetails: action.payload
             }
         default:
             return state
