@@ -35,6 +35,8 @@ export default function Cards(){
                     wind={city.wind.speed}
                     pressure={city.main.pressure}
                     img={city.weather[0].icon}
+                    lat={city.coord.lat}
+                    lon={city.coord.lon}
                 />)
                 : <span>No hay ciudades</span>
             }

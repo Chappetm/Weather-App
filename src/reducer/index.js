@@ -1,4 +1,4 @@
-import { GET_CITY, GET_DETAILS, REMOVE_CITY, GET_CITY_BY_ID } from "../actions/const"
+import { GET_CITY, GET_DETAILS, REMOVE_CITY, GET_CITY_BY_ID, GET_NEXY_WEATHER } from "../actions/const"
 
 
 const initialState = {
@@ -33,7 +33,7 @@ export default function reducer(state = initialState, action){
                 ...state,
                 cityDetails: action.payload
             }
-        case GET_DETAILS:
+        case GET_NEXY_WEATHER:
             return {
                 ...state,
                 nextWeather: action.payload

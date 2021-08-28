@@ -8,6 +8,7 @@ import visibilit from '../../media/witness.png'
 import win from '../../media/wind.png'
 import gauge from '../../media/gauge.png'
 import { Link } from 'react-router-dom';
+import getNextWeather from '../../actions/getNextWeather';
 
 //Styled-component
 
@@ -124,7 +125,7 @@ const Center = styled.div`
     justify-content: flex-start;
 `;
 
-export default function Card({name, temp, min, max, time, img, description, humidity, feel, visibility, wind, pressure, id}){
+export default function Card({lon, lat, name, temp, min, max, time, img, description, humidity, feel, visibility, wind, pressure, id}){
 
     const dispatch = useDispatch();
 
@@ -148,7 +149,7 @@ export default function Card({name, temp, min, max, time, img, description, humi
 
 
     return (
-        <CardContainer to={`/details/${id}`}>
+        <CardContainer to={`/details/${id}`} onClick={() => {dispatch(getNextWeather(lat, lon))}}>
             <Container>
                 {/* <button onClick={(e) => {handleClick(e)}}>X</button> */}
                 <DivH1>

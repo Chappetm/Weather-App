@@ -3,14 +3,16 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
 import MapView from '../MapView/MapView';
-import getDetail from '../../actions/getDetail'
+import getDetail from '../../actions/getNextWeather'
 import getCityById from '../../actions/getCityById';
+import getNextWeather from '../../actions/getNextWeather';
+import NextCard from '../NextCard/NextCard';
 import moment from 'moment';
-import win from '../../media/wind.png'
-import visib from '../../media/witness.png'
-import gauge from '../../media/gauge.png'
-import humidi from '../../media/humidity.png'
-import { Map } from 'react-leaflet'
+import win from '../../media/details/wind.png'
+import visib from '../../media/details/witness.png'
+import gauge from '../../media/details/gauge.png'
+import humidi from '../../media/details/humidity.png'
+
 
 //Styled-components
 
@@ -25,7 +27,7 @@ const Body = styled.div`
 const ContainerInfo = styled.div`
     display: flex;
     flex-direction: row;
-    width: auto;
+    width: 100%;
     height: auto;
 `;
 
@@ -34,15 +36,16 @@ const ContainerOne = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    width: auto;
+    width: 50%;
 `;
 
 const ContainerTwo = styled.div`
     width: auto;
-    background-color: blueviolet;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
+    width: 50%;
 `;
 
 const DivLocation = styled.div`
@@ -126,14 +129,14 @@ const DivGeneral = styled.div`
 const DivIcons = styled.div`
     display: flex;
     flex-direction: row;
-    background-color: black;
 `;
 
 const IconContainer = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin: 10px 30px;
+    margin: 10px 20px;
+    width: auto;
 `;
 
 const DivP = styled.div`
@@ -141,6 +144,24 @@ const DivP = styled.div`
     flex-direction: column;
     margin: 0 10px;
 `;
+
+const DivAux = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
+const DivNextDays = styled.div`
+    display: flex;
+    flex-direction: row;
+    border: solid 2px black;
+    margin: 20px 0;
+`;
+
+const Day = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 
 
 export default function Details(props){
@@ -154,6 +175,17 @@ export default function Details(props){
     //DETALLE DE LA CIUDAD
     const detail = useSelector(store => store.cityDetails)
 
+    // useEffect(() => {
+    //     dispatch(getNextWeather(detail.coord?.lat, detail.coord?.lon))
+    //     console.log('effecttttttttttttt',detail.coord?.lat)
+    // }, [])
+
+    
+
+    //DIAS QUE SIGUEN
+    const nextWeather = useSelector(store => store.nextWeather)
+    console.log('NEXTTTTTTTT',nextWeather.daily)
+
     //HORA
     const timezoneInMinutes = (detail.timezone)/ 60;
     const currTime = moment().utcOffset(timezoneInMinutes).format("h:mm A");
@@ -166,41 +198,52 @@ export default function Details(props){
                 ?<span>cargando...</span>
                 : <ContainerInfo>
                     <ContainerOne>
-                        <DivLocation>
-                            <H1>{detail.name}</H1>
-                            <Time>{currTime}</Time>
-                        </DivLocation>
-                        <DivGeneral>
-                            <DivTempInfo>
-                                <DivTemp>
-                                    <img src={`http://openweathermap.org/img/wn/${detail.weather[0].icon}@2x.png`} width='100px' height='100px'/>
-                                    <Temp>{`${Math.round(detail.main.temp)}°c`}</Temp>
-                                </DivTemp>
-                                <DivInfo>
-                                    <Description>{detail.weather[0].description}</Description>
-                                    <Feel>Feels like: {Math.round(detail.main.feels_like)}°</Feel>
-                                    <P>The high will be {Math.round(detail.main.temp_max)}°. </P>
-                                </DivInfo>
-                            </DivTempInfo>
-                            <DivIcons>
-                                <IconContainer>
-                                    <img src={win} width='30px' height='30px' />
-                                    <DivP><P>Wind</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
-                                </IconContainer>
-                                <IconContainer>
-                                    <img src={visib} width='30px' height='30px' />
-                                    <DivP><P>Visibility</P><P>{detail.visibility / 1000} km</P></DivP>
-                                </IconContainer>
-                                <IconContainer>
-                                    <img src={gauge} width='30px' height='30px' />
-                                    <DivP><P>Pressure</P><P>{detail.main.pressure} hPa</P></DivP>
-                                </IconContainer>
-                                <IconContainer>
-                                    <img src={humidi} width='30px' height='30px' />
-                                    <DivP><P>Humidity</P><P>{detail.main.humidity} %</P></DivP>
-                                </IconContainer>
-                            </DivIcons>
-                        </DivGeneral>
+                        <DivAux>
+                            <DivLocation>
+                                <H1>{detail.name}</H1>
+                                <Time>{currTime}</Time>
+                            </DivLocation>
+                            <DivGeneral>
+                                <DivTempInfo>
+                                    <DivTemp>
+                                        <img src={`http://openweathermap.org/img/wn/${detail.weather[0].icon}@2x.png`} width='130px' height='130px'/>
+                                        <Temp>{`${Math.round(detail.main.temp)}°c`}</Temp>
+                                    </DivTemp>
+                                    <DivInfo>
+                                        <Description>{detail.weather[0].description}</Description>
+                                        <Feel>Feels like: {Math.round(detail.main.feels_like)}°</Feel>
+                                        <P>The high will be {Math.round(detail.main.temp_max)}°. </P>
+                                    </DivInfo>
+                                </DivTempInfo>
+                                <DivIcons>
+                                    <IconContainer>
+                                        <img src={win} width='30px' height='30px' />
+                                        <DivP><P>Wind</P><P>{Math.round(detail.wind.speed)} m/s</P></DivP>
+                                    </IconContainer>
+                                    <IconContainer>
+                                        <img src={visib} width='30px' height='30px' />
+                                        <DivP><P>Visibility</P><P>{detail.visibility / 1000} km</P></DivP>
+                                    </IconContainer>
+                                    <IconContainer>
+                                        <img src={gauge} width='30px' height='30px' />
+                                        <DivP><P>Pressure</P><P>{detail.main.pressure} hPa</P></DivP>
+                                    </IconContainer>
+                                    <IconContainer>
+                                        <img src={humidi} width='30px' height='30px' />
+                                        <DivP><P>Humidity</P><P>{detail.main.humidity} %</P></DivP>
+                                    </IconContainer>
+                                </DivIcons>
+                            </DivGeneral>
+                        </DivAux>
+                        <DivNextDays>
+                            <Day>
+                                <NextCard icon={nextWeather.daily[0].weather[0].icon} min={nextWeather.daily[0].temp.min} max={nextWeather.daily[0].temp.max}/>
+                                <NextCard icon={nextWeather.daily[1].weather[0].icon} min={nextWeather.daily[1].temp.min} max={nextWeather.daily[1].temp.max}/>
+                                <NextCard icon={nextWeather.daily[2].weather[0].icon} min={nextWeather.daily[2].temp.min} max={nextWeather.daily[2].temp.max}/>
+                                <div></div>
+                                <div></div>
+                            </Day>
+                        </DivNextDays>
                     </ContainerOne>
                     <ContainerTwo>
                         <MapView />
