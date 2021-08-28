@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
 //Styled-components
@@ -9,11 +10,23 @@ const Container = styled.div`
     align-items: center;
 `;
 
-export default function NextCard({icon, min, max}){
+const H6 = styled.h6`
+    margin: 0;
+    font-family: 'Comfortaa';
+`;
+
+//-----------------------------------
+
+export default function NextCard({ time, icon, min, max }){
+
+    const tiempo = new Date(time * 1000)
+    const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    const date = tiempo.getDate();
+    const day = `${week[tiempo.getDay()]} ${date}`;
 
     return (
         <Container>
-            <h6>mañana</h6>
+            <H6>{day}</H6>
             <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} width='80px' height='80px'/>
             <span>{Math.round(min)}/{Math.round(max)}</span>
         </Container>

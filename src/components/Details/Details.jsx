@@ -12,6 +12,7 @@ import win from '../../media/details/wind.png'
 import visib from '../../media/details/witness.png'
 import gauge from '../../media/details/gauge.png'
 import humidi from '../../media/details/humidity.png'
+import NextDays from '../NextDays/NextDays';
 
 
 //Styled-components
@@ -153,13 +154,10 @@ const DivAux = styled.div`
 const DivNextDays = styled.div`
     display: flex;
     flex-direction: row;
-    border: solid 2px black;
+    border-radius: 10px;
     margin: 20px 0;
-`;
-
-const Day = styled.div`
-    display: flex;
-    flex-direction: column;
+    padding: 10px;
+    background-color: rgba(198, 198, 198, 0.5);
 `;
 
 
@@ -174,17 +172,6 @@ export default function Details(props){
 
     //DETALLE DE LA CIUDAD
     const detail = useSelector(store => store.cityDetails)
-
-    // useEffect(() => {
-    //     dispatch(getNextWeather(detail.coord?.lat, detail.coord?.lon))
-    //     console.log('effecttttttttttttt',detail.coord?.lat)
-    // }, [])
-
-    
-
-    //DIAS QUE SIGUEN
-    const nextWeather = useSelector(store => store.nextWeather)
-    console.log('NEXTTTTTTTT',nextWeather.daily)
 
     //HORA
     const timezoneInMinutes = (detail.timezone)/ 60;
@@ -236,17 +223,11 @@ export default function Details(props){
                             </DivGeneral>
                         </DivAux>
                         <DivNextDays>
-                            <Day>
-                                <NextCard icon={nextWeather.daily[0].weather[0].icon} min={nextWeather.daily[0].temp.min} max={nextWeather.daily[0].temp.max}/>
-                                <NextCard icon={nextWeather.daily[1].weather[0].icon} min={nextWeather.daily[1].temp.min} max={nextWeather.daily[1].temp.max}/>
-                                <NextCard icon={nextWeather.daily[2].weather[0].icon} min={nextWeather.daily[2].temp.min} max={nextWeather.daily[2].temp.max}/>
-                                <div></div>
-                                <div></div>
-                            </Day>
+                            <NextDays lat={detail.coord.lat} lon={detail.coord.lon} />
                         </DivNextDays>
                     </ContainerOne>
                     <ContainerTwo>
-                        <MapView />
+                        <MapView lat={detail.coord.lat} lon={detail.coord.lon} />
                     </ContainerTwo>
                 </ContainerInfo>
             }
