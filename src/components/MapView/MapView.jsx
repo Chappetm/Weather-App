@@ -4,7 +4,9 @@ import 'leaflet/dist/leaflet.css'
 import styled from 'styled-components'
 import { useState } from 'react';
 import { useEffect } from 'react';
-import deleteDetail from '../../actions/deleteDetail.js'
+import deleteDetail from '../../actions/deleteDetail'
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 //Styled-components
 
@@ -29,16 +31,19 @@ export default function MapView({lat, lon}){
         lon: ''
     })
 
+    const dispatch = useDispatch();
+
     useEffect(() => {
         setView({
             lat,
             lon
         })
         return () => {
-            deleteDetail(2)
+            dispatch(deleteDetail())
             console.log('se desmonto')
         }
     }, [])
+
 
     return (
         <Asd>

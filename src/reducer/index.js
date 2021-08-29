@@ -34,10 +34,10 @@ export default function reducer(state = initialState, action){
                 cityDetails: action.payload
             }
         case REMOVE_DETAIL:
-            console.log('reducer', action.payload)
+            console.log('reducer')
             return {
                 ...state,
-                cityDetails: action.payload
+                cityDetails: []
             }
         case GET_NEXY_WEATHER:
             return {

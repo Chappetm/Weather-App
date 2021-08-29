@@ -6,7 +6,6 @@ import MapView from '../MapView/MapView';
 import getDetail from '../../actions/getNextWeather'
 import getCityById from '../../actions/getCityById';
 import getNextWeather from '../../actions/getNextWeather';
-import NextCard from '../NextCard/NextCard';
 import moment from 'moment';
 import win from '../../media/details/wind.png'
 import visib from '../../media/details/witness.png'
