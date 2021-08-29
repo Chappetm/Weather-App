@@ -9,7 +9,7 @@ import Locate from './components/Location/Locate';
 function App() {
   return (
     <React.Fragment>
-      <Route exact path='/' component={Nav} />
+      <Route  path='/' component={Nav} />
       <Route exact path='/' component={Home} />
       <Route exact path='/details/:id' component={Details} />
       <Route path='/locate/:lon/:lat' component={Locate} />
