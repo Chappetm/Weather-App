@@ -105,7 +105,7 @@ const Button = styled.button`
     cursor: pointer;
     background-color: rgba(0,0,0,0);
     border: 1px solid lightgray;
-    color: #C6C6C6;
+    color: #fff;
     border-radius: 4px;
     transition: all 0.5s;
     &:hover{

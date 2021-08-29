@@ -7,10 +7,16 @@ import { useSelector } from 'react-redux'
 
 const Container = styled.div`
     width: 100%;
-    height: auto;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+`;
+
+const Span = styled.span`
+    font-family: 'Comfortaa';
+    font-size: 20px;
+    margin: 20px;
 `;
 
 export default function Cards(){
@@ -38,7 +44,7 @@ export default function Cards(){
                     lat={city.coord.lat}
                     lon={city.coord.lon}
                 />)
-                : <span>No hay ciudades</span>
+                : <Span>No cities yet 🤔</Span>
             }
         </Container>
         

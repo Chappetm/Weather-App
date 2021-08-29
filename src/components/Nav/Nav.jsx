@@ -2,6 +2,7 @@ import React from 'react'
 import SearchBar from '../SearchBar/SearchBar'
 import styled from 'styled-components';
 import clima from '../../media/clima.png'
+import placeholder from '../../media/placeholder.png'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
@@ -10,18 +11,19 @@ import { useState, useEffect } from 'react';
 const NavBar = styled.header`
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
     background-color: #046F94;
     height: 10%;
 `;
 
 const DivH2 = styled.div`
-    width:30%;
+    width:25%;
     text-align:center;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 `;
 
 const H2 = styled(Link)`
@@ -35,6 +37,26 @@ const H2 = styled(Link)`
 
 const DivSearch = styled.div`
     width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const Loc = styled(Link)`
+    font-family: 'Comfortaa';
+    text-decoration: none;
+    color: white;
+    box-shadow: none;
+    outline: none;
+    font-weight: 800;
+    margin: 3px;
+`;
+
+const DivLoc = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 25%;
 `;
 
 export default function Nav(){
@@ -68,7 +90,10 @@ export default function Nav(){
             <DivSearch>
                 <SearchBar />
             </DivSearch>
-            <Link to={`/locate/${state.lon}/${state.lat}`}>Your Location</Link>
+            <DivLoc>
+                <img src={placeholder} width='20px' height='20px'/>
+                <Loc to={`/locate/${state.lon}/${state.lat}`}>Weather in your City</Loc>
+            </DivLoc>
         </NavBar>
     )
 }
