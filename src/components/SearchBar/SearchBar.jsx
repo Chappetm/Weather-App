@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 import getCity from '../../actions/getCity'
 import styled from 'styled-components'
 import lupa from '../../media/lupa.png'
+import { useHistory } from 'react-router-dom'
 
 //Styled-components
 
@@ -57,9 +58,9 @@ const Ico = styled.img`
 
 export default function SearchBar(){
     const [ city, setCity ] = useState('')
-
     const dispatch = useDispatch()
-
+    const history = useHistory()
+    
     const handleChange = (e) => {
         setCity(e.target.value)
     }
@@ -67,6 +68,7 @@ export default function SearchBar(){
     const handleSubmit = (e) => {
         e.preventDefault()
         dispatch(getCity(city))
+        history.push('/')
         setCity('')
     }
 
