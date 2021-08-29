@@ -96,6 +96,23 @@ const Time = styled(Description)`
     margin: 3px;
 `;
 
+const Button = styled.button`
+    font-family: 'Comfortaa';
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    margin: 20px 0 0 -40px;
+    cursor: pointer;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid lightgray;
+    color: #C6C6C6;
+    border-radius: 4px;
+    transition: all 0.5s;
+    &:hover{
+        background-color: rgba(0,0,0,0.5);
+    }
+`;
+
 const City = styled(H1)`
     font-weight: 900;
     padding-left: 5px;
@@ -133,12 +150,6 @@ export default function Card({lon, lat, name, temp, min, max, time, img, descrip
         e.preventDefault()
         dispatch(removeCity(id))
     }
-    
-    //AMANECER
-    // var sec = 1425909686;
-    // var date = new Date(sec * 1000);
-    // var timestr = date.toLocaleTimeString();
-    // console.log(newTime.toString())
 
     //HORA
     const timezoneInMinutes = time / 60;
@@ -151,7 +162,6 @@ export default function Card({lon, lat, name, temp, min, max, time, img, descrip
     return (
         <CardContainer to={`/details/${id}`} onClick={() => {dispatch(getNextWeather(lat, lon))}}>
             <Container>
-                {/* <button onClick={(e) => {handleClick(e)}}>X</button> */}
                 <DivH1>
                     <H1>Weather in <City>{name}</City></H1>
                     <Time>{currTime}</Time>
@@ -171,6 +181,7 @@ export default function Card({lon, lat, name, temp, min, max, time, img, descrip
                     <img src={`http://openweathermap.org/img/wn/${img}@2x.png`} width='100px' height='100px'/>
                     <MinMax>{Math.round(max)}°/{Math.round(min)}°</MinMax>
                 </TempDiv>
+                <Button onClick={(e) => {handleClick(e)}}>X</Button>
             </Container>
         </CardContainer>
     )

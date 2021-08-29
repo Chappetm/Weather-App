@@ -3,6 +3,7 @@ import SearchBar from '../SearchBar/SearchBar'
 import styled from 'styled-components';
 import clima from '../../media/clima.png'
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
 //Styled-components
 
@@ -38,6 +39,26 @@ const DivSearch = styled.div`
 
 export default function Nav(){
 
+    const [state, setState] = useState({
+        lon: 0,
+        lat: 0
+    })
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                setState({
+                    lon: position.coords.longitude,
+                    lat: position.coords.latitude
+                })
+            },
+            function(error){
+                console.log(error)
+            },
+            { enableHighAccuracy: true }
+        )
+    }, [])
+
     return (
         <NavBar>
             <DivH2>
@@ -47,6 +68,7 @@ export default function Nav(){
             <DivSearch>
                 <SearchBar />
             </DivSearch>
+            <Link to={`/locate/${state.lon}/${state.lat}`}>Your Location</Link>
         </NavBar>
     )
 }
