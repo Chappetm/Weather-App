@@ -192,7 +192,7 @@ export default function Details(props){
         <Body>
             {
                 (Array.isArray(detail)) 
-                ?<DivLoader><img src={loader} width='100px' height='100px' /></DivLoader>
+                ?<DivLoader><img src={loader} /></DivLoader>
                 : <ContainerInfo>
                     <ContainerOne>
                         <DivAux>
