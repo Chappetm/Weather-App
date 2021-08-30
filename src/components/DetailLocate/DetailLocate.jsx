@@ -7,41 +7,48 @@ import gauge from '../../media/details/gauge.png'
 import humidi from '../../media/details/humidity.png'
 import NextDays from '../NextDays/NextDays';
 import MapView from '../MapView/MapView';
-import { useDispatch, useSelector } from 'react-redux';
-import getCityByCoords from '../../actions/getCityByCoords';
+import { useSelector } from 'react-redux';
+import loaderr from '../../media/loader2.gif'
+import { Link } from 'react-router-dom';
+import back from '../../media/atras.png'
 
 //Styled-components
+
 
 const Body = styled.div`
     height: auto;
     width: auto;
-    padding: 80px;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: row;
 `;
 
 const ContainerInfo = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
     height: auto;
+    margin: 10px;
 `;
 
 const ContainerOne = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 `;
 
 const ContainerTwo = styled.div`
-    width: auto;
+    width: 80%;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    width: 50%;
+    padding: 30px;
 `;
 
 const DivLocation = styled.div`
@@ -149,12 +156,35 @@ const DivAux = styled.div`
 const DivNextDays = styled.div`
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
     margin: 20px 0;
     padding: 10px;
-    background-color: rgba(198, 198, 198, 0.5);
 `;
 
+const DivLoader = styled.div`
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const DivButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+`;
+
+const Button = styled(Link)`
+    color: black;
+    font-family: 'Comfortaa';
+    font-size: 20px;
+    font-weight: 800;
+    margin: 20px 0 0 20px;
+    margin: 0;
+`;
 
 
 export default function DetailLocate(){
@@ -169,8 +199,12 @@ export default function DetailLocate(){
         <Body>
             {
                 (Array.isArray(detail)) 
-                ?<span>cargando...</span>
+                ?<DivLoader><img src={loaderr} /></DivLoader>
                 : <ContainerInfo>
+                    <DivButton>
+                        <img src={back} width='10px' height='10px' />
+                        <Button to='/'>Back</Button>
+                    </DivButton>
                     <ContainerOne>
                         <DivAux>
                             <DivLocation>

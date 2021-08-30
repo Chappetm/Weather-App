@@ -1,12 +1,12 @@
 import React from 'react'
-import { MapContainer, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import styled from 'styled-components'
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import deleteDetail from '../../actions/deleteDetail'
-import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import place from '../../media/icon.svg'
+import L from 'leaflet';
 
 //Styled-components
 
@@ -51,6 +51,13 @@ export default function MapView({lat, lon}){
                 typeof view.lat === 'number'
                 ?<Map center={[view.lat, view.lon]} zoom={9}>
                     <TileLayer attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors' url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"/>
+                    <Marker position={{ lat: view.lat, lon: view.lon }} icon={L.icon({
+                        iconUrl: place,
+                        iconRetinaUrl: place,
+                        iconSize: [40, 30]
+
+                    }
+                    )} />
                 </Map>
                 : <span>ads</span>
             }

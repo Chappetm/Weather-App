@@ -19,6 +19,14 @@ const Span = styled.span`
     margin: 20px;
 `;
 
+const DivSpan = styled.div`
+    height:100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
 export default function Cards(){
     
     const cities = useSelector(store => store.citiesLoaded)
@@ -44,7 +52,7 @@ export default function Cards(){
                     lat={city.coord.lat}
                     lon={city.coord.lon}
                 />)
-                : <Span>No cities yet 🤔</Span>
+                : <DivSpan><Span>No Cities yet</Span></DivSpan>
             }
         </Container>
         

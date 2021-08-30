@@ -3,9 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
 import MapView from '../MapView/MapView';
-import getDetail from '../../actions/getNextWeather'
 import getCityById from '../../actions/getCityById';
-import getNextWeather from '../../actions/getNextWeather';
 import moment from 'moment';
 import win from '../../media/details/wind.png'
 import visib from '../../media/details/witness.png'
@@ -13,6 +11,8 @@ import gauge from '../../media/details/gauge.png'
 import humidi from '../../media/details/humidity.png'
 import NextDays from '../NextDays/NextDays';
 import loader from '../../media/loader2.gif'
+import { Link } from 'react-router-dom';
+import back from '../../media/atras.png'
 
 //Styled-components
 
@@ -32,6 +32,7 @@ const ContainerInfo = styled.div`
     justify-content: flex-start;
     width: 100%;
     height: auto;
+    margin: 10px;
 `;
 
 const ContainerOne = styled.div`
@@ -156,10 +157,8 @@ const DivAux = styled.div`
 const DivNextDays = styled.div`
     display: flex;
     flex-direction: row;
-    border-radius: 10px;
     margin: 20px 0;
     padding: 10px;
-    background-color: rgba(198, 198, 198, 0.5);
 `;
 
 const DivLoader = styled.div`
@@ -170,7 +169,23 @@ const DivLoader = styled.div`
     align-items: center;
 `;
 
+const DivButton = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 10px;
+`;
 
+const Button = styled(Link)`
+    color: black;
+    font-family: 'Comfortaa';
+    font-size: 20px;
+    font-weight: 800;
+    margin: 20px 0 0 20px;
+    margin: 0;
+`;
 
 export default function Details(props){
 
@@ -194,6 +209,10 @@ export default function Details(props){
                 (Array.isArray(detail)) 
                 ?<DivLoader><img src={loader} /></DivLoader>
                 : <ContainerInfo>
+                    <DivButton>
+                        <img src={back} width='10px' height='10px' />
+                        <Button to='/'>Back</Button>
+                    </DivButton>
                     <ContainerOne>
                         <DivAux>
                             <DivLocation>
