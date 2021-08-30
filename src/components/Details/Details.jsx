@@ -12,21 +12,24 @@ import visib from '../../media/details/witness.png'
 import gauge from '../../media/details/gauge.png'
 import humidi from '../../media/details/humidity.png'
 import NextDays from '../NextDays/NextDays';
-
+import loader from '../../media/loader2.gif'
 
 //Styled-components
 
 const Body = styled.div`
     height: auto;
     width: auto;
-    padding: 80px;
     display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: row;
 `;
 
 const ContainerInfo = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     width: 100%;
     height: auto;
 `;
@@ -34,18 +37,18 @@ const ContainerInfo = styled.div`
 const ContainerOne = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
-    width: 50%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
 `;
 
 const ContainerTwo = styled.div`
-    width: auto;
+    width: 80%;
+    height: 500px;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10px;
-    width: 50%;
+    padding: 30px;
 `;
 
 const DivLocation = styled.div`
@@ -159,6 +162,14 @@ const DivNextDays = styled.div`
     background-color: rgba(198, 198, 198, 0.5);
 `;
 
+const DivLoader = styled.div`
+    height: 100%;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
 
 
 export default function Details(props){
@@ -181,7 +192,7 @@ export default function Details(props){
         <Body>
             {
                 (Array.isArray(detail)) 
-                ?<span>cargando...</span>
+                ?<DivLoader><img src={loader} width='100px' height='100px' /></DivLoader>
                 : <ContainerInfo>
                     <ContainerOne>
                         <DivAux>
