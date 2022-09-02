@@ -1,16 +1,17 @@
 import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import getCity from "../../actions/getCity";
 import Cards from "../Cards/Cards";
 
 export default function Home() {
   const asd = useSelector((state) => state.citiesLoaded);
+  const dispatch = useDispatch();
   useEffect(() => {
     console.log("asd");
 
-    getCity("necochea");
+    dispatch(getCity("necochea"));
   }, [asd]);
 
   return <Cards />;
