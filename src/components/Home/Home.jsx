@@ -12,7 +12,7 @@ export default function Home() {
     console.log("asd");
 
     dispatch(getCity("necochea"));
-  }, [asd]);
+  });
 
   return <Cards />;
 }
